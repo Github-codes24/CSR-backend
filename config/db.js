@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { setServers } from 'node:dns';
 
 /**
  * Connect to MongoDB using Mongoose
@@ -6,6 +7,13 @@ import mongoose from 'mongoose';
  */
 const connectDB = async () => {
   try {
+    // Respect the machine's DNS by default; allow an explicit resolver override when needed.
+    const dnsServers = (process.env.DNS_SERVERS || '')
+      .split(',')
+      .map((server) => server.trim())
+      .filter(Boolean);
+    if (dnsServers.length > 0) setServers(dnsServers);
+
     const mongoURI = process.env.MONGO_URI || process.env.MONGODB_URI;
 
     if (!mongoURI) {

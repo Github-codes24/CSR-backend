@@ -6,6 +6,8 @@ import connectDB from './config/db.js';
 dotenv.config();
 
 const app = express();
+import { setServers } from "node:dns";
+setServers(["8.8.8.8", "8.8.4.4", "1.1.1.1"]);
 
 // Call database connection function
 connectDB();
