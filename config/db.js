@@ -1,9 +1,5 @@
 import mongoose from 'mongoose';
 
-/**
- * Connect to MongoDB using Mongoose
- * Reads MONGO_URI from your .env file
- */
 const connectDB = async () => {
   try {
     const mongoURI = process.env.MONGO_URI || process.env.MONGODB_URI;
